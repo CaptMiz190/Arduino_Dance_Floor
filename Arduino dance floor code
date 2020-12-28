@@ -1,0 +1,81 @@
+int RM = 0;
+int RS = 0;
+int GM = 0;
+int GS = 0;
+int BM = 0;
+int BS = 0;
+int SW1 = 2;
+int SW2 = 7;
+int RDW1 = 0;
+int RDW2 = 0;
+int RMPot = 0;
+int GMPot = 0;
+int BMPot = 0;
+int RSPot = 0;
+int GSPot = 0;
+int BSPot = 0;
+float CD = 4.011764706;
+
+
+void setup()
+{
+  pinMode(11, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(9, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(A0, INPUT);
+  Serial.begin(9600);
+
+}
+
+void loop()
+{
+  	RMPot = analogRead(A0);
+  	RMPot /= CD;
+  	GMPot = analogRead(A1);
+  	GMPot /= CD;
+  	BMPot = analogRead(A2);
+  	BMPot /= CD;
+  	RSPot = analogRead(A3);
+  	RSPot /= CD;
+  	GSPot = analogRead(A4);
+  	GSPot /= CD;
+  	BSPot = analogRead(A5);
+  	BSPot /= CD;
+  	Serial.println(CD);
+  	Serial.println(RMPot);
+  	Serial.println(GMPot);
+  	Serial.println(BMPot);
+  	Serial.println(RSPot);
+  	Serial.println(GSPot);
+  	Serial.println(BSPot);
+	  RS = random(RMPot, 255);
+    GM = random(GMPot, 255);
+    BM = random(BMPot, 255);
+    RS = random(RSPot, 255);
+    GS = random(GSPot, 255);
+    BS = random(BSPot, 255);
+  	Serial.println("MAIN RGB VALUE");
+  	Serial.print(RM);
+  	Serial.print(",");
+  	Serial.print(GM);
+  	Serial.print(",");
+  	Serial.println(BM);
+  	Serial.println("SUB RGB VALUE");
+  	Serial.print(RS);
+  	Serial.print(",");
+  	Serial.print(GS);
+  	Serial.print(",");
+  	Serial.println(BS);
+    analogWrite(11, RM);
+    analogWrite(10, GM);
+    analogWrite(9, BM);
+    analogWrite(6, RS);
+    analogWrite(5, GS);
+    analogWrite(3, BS);
+	delay (1000);
+
+
+}
